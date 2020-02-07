@@ -35,6 +35,8 @@ app.get("/", function (req, res) {
             result.link = $(this)
                 .children("a")
                 .attr("href");
+            
+        
 
             db.Article.create(result)
                 .then(function (dbArticle) {
@@ -45,5 +47,41 @@ app.get("/", function (req, res) {
                 });
         });
         res.send("Finished scraping");
+    });
+});
+//go to page to locate articles
+app.get("/articles", function(req, res) {
+    db.Article.find({})
+    .then(function(dbArticle) {
+        res.json(dbArticle)
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+//grab a specific article by its ID
+
+app.get("/articles/:id", function(req, res) {
+    db.Article.findOne({ _id: req.params.id })
+    .populate("note")
+    .then(function(dbArticle) {
+        res.json(dbArticle);
     })
-})
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
+//posting and saving an article
+
+app.post("/articles/:id", function(req, res) {
+    db.Note.create(req.body)
+    .then(function(dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    })
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
