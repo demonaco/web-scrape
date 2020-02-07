@@ -20,11 +20,30 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/matthewdemonaco", { useNewUrlParser: true });
 
 //Using a get route to grab HTTP for scraping
-app.get("/scrape", function(req, res) {
-    axios.get("https://www.washingtonpost.com/politics/?nid=top_nav_politics").then(function(res){
+app.get("/", function (req, res) {
+    axios.get("https://www.wsj.com").then(function (res) {
         var $ = cheerio.load(res.data);
+
+
+        $("article h3").each(function (i, element) {
+
+            var result = {};
+
+            result.title = $(this)
+                .children("a")
+                .text();
+            result.link = $(this)
+                .children("a")
+                .attr("href");
+
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    console.log(dbArticle);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        });
+        res.send("Finished scraping");
     })
 })
-
-
-
