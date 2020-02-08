@@ -1,11 +1,11 @@
 var express = require('express');
-var logger = require('logger');
+var logger = require('morgan');
 var mongoose = require('mongoose');
 
 var cheerio = require('cheerio');
 var axios = require('axios');
 
-var db = require("./models");
+// var db = require("./models");
 
 var PORT = 8000;
 
@@ -21,8 +21,8 @@ mongoose.connect("mongodb://localhost/matthewdemonaco", { useNewUrlParser: true 
 
 //Using a get route to grab HTTP for scraping
 app.get("/", function (req, res) {
-    axios.get("https://www.wsj.com").then(function (res) {
-        var $ = cheerio.load(res.data);
+    axios.get("https://www.wsj.com").then(function (response) {
+        var $ = cheerio.load(response.data);
 
 
         $("article h3").each(function (i, element) {
@@ -84,4 +84,9 @@ app.post("/articles/:id", function(req, res) {
     .catch(function(err) {
         res.json(err);
     });
+});
+
+//Server info
+app.listen(PORT, function() {
+    console.log(PORT + " is running")
 });
