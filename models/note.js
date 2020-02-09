@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var NoteSchema = new Schema({
+var SaveSchema = new Schema({
     title: String,
     body: String,
     summary: String,
 });
 
-var Note = mongoose.model("Note", NoteSchema);
+var saveNote = mongoose.model("Note", SaveSchema);
 
-module.exports = Note;
+module.exports = saveNote;

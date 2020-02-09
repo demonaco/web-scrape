@@ -1,11 +1,14 @@
 var express = require('express');
+
 var logger = require('morgan');
+
 var mongoose = require('mongoose');
 
 var cheerio = require('cheerio');
+
 var axios = require('axios');
 
-// var db = require("./models");
+var db = require("./models");
 
 var PORT = 8000;
 
@@ -15,7 +18,13 @@ app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+
+//Setting up our handlebars engine
+var exphbs = require('express-handlebars');
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost/matthewdemonaco", { useNewUrlParser: true });
 
