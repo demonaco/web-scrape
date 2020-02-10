@@ -24,9 +24,9 @@ var exphbs = require('express-handlebars');
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/matthewdemonaco", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/articlesDB", { useNewUrlParser: true });
 
 //Using a get route to grab HTTP for scraping
 app.get("/", function (req, res) {
@@ -45,8 +45,6 @@ app.get("/", function (req, res) {
                 .children("a")
                 .attr("href");
             
-        
-
             db.Article.create(result)
                 .then(function (dbArticle) {
                     console.log(dbArticle);
@@ -55,7 +53,8 @@ app.get("/", function (req, res) {
                     console.log(err);
                 });
         });
-        res.send("Finished scraping");
+
+        res.render("index");
     });
 });
 //go to page to locate articles
