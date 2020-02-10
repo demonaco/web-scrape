@@ -1,27 +1,27 @@
 <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-<a class="navbar-brand" href="#">Navbar w/ text</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <li class="nav-item active">
-        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Saved Articles<span class="sr-only">(current)</span></a>
-      </li>
+<a class="navbar-brand" href="#">Let's read some news</a>
 </nav>
 <div class="jumbotron">
   <h1 class="display-4">Wallstreet Journal Scraper</h1>
   <p class="lead">Check out some articles below. Feel free to click and leave a comment!</p>
   <hr class="my-4">
   <p></p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
 </div>  
+<section class="notes">
+<div class="card">
+  <h5 class="card-header">Comment Section</h5>
+  <div class="card-body">
+    <h3 id="noteSection"><p></p><h3>
+  </div>
+</div>
+</section>
 <section>
-<div id="articleSpace">
-{{#each articles}}
-{{this.title}}
-{{this.link}}
-{{/each}}
+<div class="card">
+  <h5 class="card-header">Featured Articles</h5>
+  <div class="card-body">
+    <p id="articleSpace"></p>
+  </div>
+</div>
+
 </div>
 </section>

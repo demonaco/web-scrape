@@ -1,0 +1,13 @@
+.jumbotron {
+    background-image: url(/assets/images/absolutvision-WYd_PkCa1BY-unsplash.jpg);
+    ;
+}
+
+#articleSpace {
+    font-size: 12px;
+}
+
+.display-4 .lead {
+    text-align: center;
+    color: black;
+}
