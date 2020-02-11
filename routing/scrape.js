@@ -1,3 +1,7 @@
+var cheerio = require('cheerio');
+
+var axios = require('axios');
+
 //Using a get route to grab HTTP for scraping
 app.get("/", function (req, res) {
     axios.get("https://www.wsj.com").then(function (response) {
