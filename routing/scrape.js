@@ -2,6 +2,9 @@ var cheerio = require('cheerio');
 
 var axios = require('axios');
 
+var db = require('../models');
+
+module.exports = function(app) {
 //Using a get route to grab HTTP for scraping
 app.get("/", function (req, res) {
     axios.get("https://www.wsj.com").then(function (response) {
@@ -67,3 +70,4 @@ app.post("/articles/:id", function(req, res) {
         res.json(err);
     });
 });
+};

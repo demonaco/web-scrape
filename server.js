@@ -4,11 +4,11 @@ var logger = require('morgan');
 
 var mongoose = require('mongoose');
 
-var routes = require('./routing')
+var app = express();
+
+var routes = require('./routing/scrape')(app);
 
 var PORT = 8000;
-
-var app = express();
 
 app.use(logger("dev"));
 
@@ -21,7 +21,6 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
-app.use(routes);
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
