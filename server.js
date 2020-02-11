@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-var routes = require('./routing/scrape')(app);
+require('./routing/scrape')(app);
 
 var PORT = 8000;
 
