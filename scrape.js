@@ -46,8 +46,8 @@ app.get("/", function (req, res) {
                 .attr("href");
             
             db.Article.create(result)
-                .then(function (dbArticle) {
-                    console.log(dbArticle);
+                .then(function (articles) {
+                    console.log(articles);
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -60,8 +60,8 @@ app.get("/", function (req, res) {
 //go to page to locate articles
 app.get("/articles", function(req, res) {
     db.Article.find({})
-    .then(function(dbArticle) {
-        res.json(dbArticle)
+    .then(function(articles) {
+        res.json(articles)
     }).catch(function(err) {
         res.json(err);
     });
@@ -71,8 +71,8 @@ app.get("/articles", function(req, res) {
 app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
     .populate("note")
-    .then(function(dbArticle) {
-        res.json(dbArticle);
+    .then(function(articles) {
+        res.json(articles);
     })
     .catch(function(err) {
         res.json(err);
@@ -86,8 +86,8 @@ app.post("/articles/:id", function(req, res) {
     .then(function(dbNote) {
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
-    .then(function(dbArticle) {
-        res.json(dbArticle);
+    .then(function(articles) {
+        res.json(articles);
     })
     .catch(function(err) {
         res.json(err);
