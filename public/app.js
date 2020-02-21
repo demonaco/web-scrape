@@ -5,12 +5,14 @@ $.getJSON("/articles", function(data) {
 })
 
 $(document).on("click", "p", function() {
+    console.log("THIS HOULD ONLY RUN ONCE----")
     $("#noteSection").empty();
     var thisId = $(this).attr("data-id");
     $.ajax({
         method: "GET",
         url: "/articles/" + thisId
     }).then(function(data) {
+        
         console.log(data)
         $("#noteSection").append("<h4>" + data.title + "</h4>")
         $("#noteSection").append("<textarea id='body' class='form-control' placeholder='Your comment here'></textarea>")
